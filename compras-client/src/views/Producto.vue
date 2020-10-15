@@ -1,11 +1,11 @@
 <template>
   <div>
       <h1>Productos</h1>
-    <!--<div class="Cart">
+    <div class="Cart">
           <p>
             Cart({{cart}})
           </p>
-    </div>-->
+    </div>
     <div class="row" v-if="getProducto.length > 0">
       <div class="col-sm mt-5">
         <b-card-group deck>

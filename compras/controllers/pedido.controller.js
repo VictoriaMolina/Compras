@@ -1,4 +1,5 @@
 const { Pedidos } = require('../models/pedido.models');
+const { Usuarios } = require('../models/usuarios.models');
 
 async function agregarPedido (req, res){
     const body = req.body;
@@ -120,11 +121,20 @@ async function estatusLista(req, res){
  */
 async function usuarioLista(req, res){
     const query = req.query;
-    console.log(query)
+
+    /**
+     *  return Employee.findOne({ employeeName: employeeName })
+    .populate("locations")
+    .exec((err, locations) => {
+      console.log(locations);
+    });
+     */
     try{
         const list = await Pedidos.find({
             usuario: query.usuario
-        });
+        }/*, function(err, list){
+            Usuarios.populate(list, {path: "nombre"})
+        }*/)
         if(list){
             res.json({
                 'data': list

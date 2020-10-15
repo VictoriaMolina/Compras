@@ -25,7 +25,7 @@
           id="input-3"
           v-model="form.img"
           required
-          placeholder="Descripcion"
+          placeholder="Imagen"
         ></b-form-input>
       </b-form-group>
 

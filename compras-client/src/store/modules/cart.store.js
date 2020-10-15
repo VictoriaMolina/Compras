@@ -1,3 +1,6 @@
+import axios from "axios";
+import EventBus from '@/pluggins/eventBus'
+
 export default {
     state: {
       pedido: []
@@ -20,14 +23,25 @@ export default {
       }
     },
     actions: {
-      agregarProducto(context, producto) {
-        if (producto) {
-          context.commit("incrementarCantidad", producto);
-        } else {
-          context.commit("sumarProducto", producto);
-        }
-        context.commit("eliminarProducto", producto);
-      }
+      agregarPedido({state, dispatch}){
+        axios.post('http://localhost:3000/pedido/new', {
+        usuario: state.currentTaskName,
+        producto: state.currentTaskDesc,
+        negocio: state.currentTaskDesc
+
+    })
+        .then(function (response) {
+            if (response.status === "200") {
+                EventBus.$emit("TaskSuccess");
+                dispatch('getTaskListAction()');
+            } else {
+                EventBus.$emit("TaskError", response.data.message);
+            }
+        })
+        .catch(function (error) {
+            EventBus.$emit("TaskError", error.message);
+        });
+    }
     },
     getters: {
       productsOnCart(state, getters, rootState) {
