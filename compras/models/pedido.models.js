@@ -16,7 +16,7 @@ const pedidoSchema = new mongoose.Schema({
 
     usuario: {
         type: mongoose.Schema.ObjectId,
-        ref: 'Usuarios',
+        ref: 'Usuario',
         required: true
     },
     negocio: {

@@ -7,8 +7,10 @@
           <li class="mb-4">
             <cardComponent
               v-for="pedido in pedidos"
-              :cardHeader="pedido.usuario"
-              :cardDescription="pedido.negocio"
+              :cardHeader="pedido.usuario.nombre"
+              :cardDescription="pedido.negocio.nombre"
+              :cardText="pedido.negocio.tipo"
+              :cardItem="pedido.productos"
               :cardId="pedido._id"
               :key="pedido._id"
             >

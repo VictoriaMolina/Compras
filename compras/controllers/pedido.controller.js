@@ -134,7 +134,7 @@ async function usuarioLista(req, res){
             usuario: query.usuario
         }/*, function(err, list){
             Usuarios.populate(list, {path: "nombre"})
-        }*/)
+        }*/).populate("usuario productos negocio")
         if(list){
             res.json({
                 'data': list
@@ -163,7 +163,7 @@ async function negocioLista(req, res){
     try{
         const list = await Pedidos.find({
             negocio: negocio
-        });
+        }).populate("usuario productos negocio");
         if(list){
             res.json({
                 'data': list

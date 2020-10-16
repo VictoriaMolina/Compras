@@ -7,11 +7,18 @@
           <li class="mb-4">
             <cardComponent
               v-for="pedido in pedidos"
-              :cardHeader="pedido.negocio"
-              :cardDescription="pedido.productos"
+              :cardHeader="pedido.usuario.nombre"
+              :cardItem="pedido.negocio.tipo"
+              :cardDescription="pedido.negocio.nombre"
+              :cardText="pedido.productos"
               :cardId="pedido._id"
               :key="pedido._id"
             >
+            <b-button
+                class="mr-3"
+                variant="danger"
+                v-on:click="deletePedido(pedido._id)"
+                >Delete</b-button>
             </cardComponent>
           </li>
         </ul>
@@ -34,7 +41,8 @@ export default {
     };
   },
   methods: {
-    async getPedidos() {
+    async getPedidosNegocios() {
+      console.log("this.getPedidosNegocios");
       try {
         const response = await axios.get("http://localhost:3000/pedido/negocioList", {
           params: {
@@ -50,9 +58,38 @@ export default {
         console.error(error);
       }
     },
+    deletePedido(pedidoId) {
+      const vueInstance = this;
+      axios.post("http://localhost:3000/pedido/delete", {
+          pedidoId: pedidoId,
+        })
+        .then(function(response) {
+          if (response.status === "200") {
+            vueInstance.$bvToast.toast("Eliminado", {
+              title: `Eliminado`,
+              variant: "success",
+              solid: true,
+            });
+          } else {
+            vueInstance.$bvToast.toast(response.data.message, {
+              title: "Error",
+              variant: "danger",
+              solid: true,
+            });
+          }
+        })
+        .catch(function(error) {
+          vueInstance.$bvToast.toast(error.message, {
+            title: "Error",
+            variant: "danger",
+            solid: true,
+          });
+        });
+    }
   },
   mounted() {
-    this.getPedidos()
+    this.getPedidosNegocios()
+    this.deletePedido()
   },
 };
 </script>

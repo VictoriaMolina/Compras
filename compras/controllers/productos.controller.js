@@ -47,11 +47,11 @@ async function nuevoProducto(req, res){
  */
 async function productoList(req, res){
     const query = req.query
-    console.log(req.params)
+    /*console.log(req.params)
     console.log(req.query);
     console.log(query)
     console.log("****")
-    console.log(query.negocio)
+    console.log(query.negocio)*/
     try{
         const results = await Productos.find({
             negocio: query.negocio
@@ -80,12 +80,12 @@ async function productoList(req, res){
  * @param {*} res - request Object
  */
 async function productoInfo(req, res){
-    const productoId = req.query.pid;
-
-    if(productoId) {
+    const query = req.query
+    console.log("QUERY");
+    console.log(query);
         try{
             const results = await Productos.findOne({
-                _id: productoId
+                productoId: query.productoId
             });
                 
             if(results){
@@ -104,10 +104,6 @@ async function productoInfo(req, res){
                 'data': {}
             });
         }
-
-    } else {
-        res.status(402.).send("PARAMETROS ERRONEOS")
-    }
     
 };
 

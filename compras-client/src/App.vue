@@ -12,7 +12,7 @@
           <router-link to="/" class="nav-link">Home</router-link>
           <router-link to="/form" class="nav-link">ProductosForm</router-link>
           <router-link to="/pedidos" class="nav-link">Usuario</router-link>
-          <router-link to="/negocioList" class="nav-link">Negocio</router-link>
+          <router-link to="/pedidosNegocio" class="nav-link">Negocio</router-link>
           <!--<router-link to="/list/:ciudad" class="nav-link">Lista</router-link>-->
         </b-navbar-nav>
         <b-navbar-nav class="ml-auto">

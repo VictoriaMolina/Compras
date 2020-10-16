@@ -15,7 +15,15 @@
               :key="negocio._id"
             >
               <b-card-text>{{ negocio.tipo }} </b-card-text>
-              <router-link :to="getRoute(negocio._id)">Productos</router-link>
+              <!--<router-link :to="getRoute(negocio._id)">Productos</router-link>-->
+              <b-button
+                variant="outline-warning"
+                class="my-2 my-sm-0"
+                type="submit"
+                v-on:click="getProducto()"
+                :to="getRoute(negocio._id)"
+                >Productos</b-button
+              >
             </b-card>
           </b-card-group>
         </div>
@@ -41,18 +49,15 @@ export default {
       await this.$store.dispatch("negocios/getProductosAction");
     },
     getRoute(negocio) {
-      console.log(`/producto/negocio/${negocio}`)
-      this.updateNegocio(negocio)
+      console.log(`/producto/negocio/${negocio}`);
+      this.updateNegocio(negocio);
       return `/producto/negocio/${negocio}`;
     },
-    updateNegocio(negocio){
-      console.log(negocio)
-      this.$store.commit('negocios/SET_NEGOCIO', negocio);
+    updateNegocio(negocio) {
+      console.log(negocio);
+      this.$store.commit("negocios/SET_NEGOCIO", negocio);
     }
   },
-  mounted() {
-    this.getProducto();
-  }
 };
 </script>
 <style scoped></style>

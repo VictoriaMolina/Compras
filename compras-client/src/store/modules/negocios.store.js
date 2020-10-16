@@ -6,12 +6,15 @@ const state = {
     ciudad: "",
     /*tipo: "",*/
     productosList: [],
-    negocio: ""
+    negocio: "",
+    producto: ""
 };
 
 const getters = {
     getNegocios: (state) => state.negociosList,
     getCiudad: (state) => state.ciudad,
+    getNegocio: (state) => state.negocio,
+    getProducto: (state) => state.producto,
     getProductos: (state) => state.productosList
 };
 
@@ -50,7 +53,29 @@ const actions = {
             response.data.data &&
             response.data.data.length > 0
           ) {
-            commit('SET_NEGOCIO', response.data.data)
+            commit('SET_PRODUCTOS', response.data.data)
+          }
+          console.log(response);
+        } catch (error) {
+          console.error(error);
+        }
+      },
+      async getProductoInfoAction({commit, state}){
+        try {
+          const response = await axios.get(
+            "http:///localhost:3000/producto/info",{
+                params:{productoId: state.productoId}
+                
+            });
+            console.log("STATE");
+            console.log(state)
+  
+          if (
+            response.data &&
+            response.data.data &&
+            response.data.data.length > 0
+          ) {
+            commit('SET_PRODUCTO', response.data.data)
           }
           console.log(response);
         } catch (error) {
@@ -71,17 +96,26 @@ const mutations = {
     /*SET_TIPO(state, tipo){
         state.tipo = tipo
     },*/
-    SET_PRODUCTO(state, producto){
-        //console.log(producto)
-        state.productosList = producto
+    SET_PRODUCTOS(state, productos){
+        //console.log("******");
+        //console.log(productos)
+        //console.log(state)
+        state.productosList = productos
     },
-
     SET_NEGOCIO(state, negocio){
-        console.log(negocio)
-        console.log(state)
+        //console.log(negocio)
+        //console.log(state)
         state.negocio = negocio
-        console.log(state)
-    }
+        //console.log(state)
+    },
+    SET_PRODUCTO(state, producto){
+      console.log("producto");
+      console.log(producto)
+      console.log("state");
+      console.log(state)
+      state.producto = producto
+      console.log(state)
+  }
 }
 export default {
     namespaced: true,

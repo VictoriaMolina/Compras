@@ -1,5 +1,5 @@
-import axios from "axios";
-import EventBus from '@/pluggins/eventBus'
+//import axios from "axios";
+//import EventBus from '@/pluggins/eventBus'
 
 export default {
     state: {
@@ -23,7 +23,7 @@ export default {
       }
     },
     actions: {
-      agregarPedido({state, dispatch}){
+      /*agregarPedido({state}){
         axios.post('http://localhost:3000/pedido/new', {
         usuario: state.currentTaskName,
         producto: state.currentTaskDesc,
@@ -32,16 +32,16 @@ export default {
     })
         .then(function (response) {
             if (response.status === "200") {
-                EventBus.$emit("TaskSuccess");
-                dispatch('getTaskListAction()');
+                EventBus.$emit("Success");
+                
             } else {
-                EventBus.$emit("TaskError", response.data.message);
+                EventBus.$emit("Error", response.data.message);
             }
         })
         .catch(function (error) {
-            EventBus.$emit("TaskError", error.message);
+            EventBus.$emit("Error", error.message);
         });
-    }
+    }*/
     },
     getters: {
       productsOnCart(state, getters, rootState) {
